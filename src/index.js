@@ -4,6 +4,8 @@ import Table from './Components/Table';
 import Form from './Components/Form';
 import {BrowserRouter as Router, Switch, Route,Link} from 'react-router-dom';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
 import About from './Routes/About.js';
 
 
@@ -57,6 +59,9 @@ class App extends React.Component{
             </li>
             <li>
               <Link to="/users">Users</Link>
+            </li>
+            <li>
+              <Button>Teste</Button>
             </li>
           </ul>
         </nav>
