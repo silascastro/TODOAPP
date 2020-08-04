@@ -7,6 +7,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import About from './Routes/About.js';
+import {Nav, Navbar, NavDropdown, FormControl} from 'react-bootstrap';
 
 
 class App extends React.Component{
@@ -49,22 +50,18 @@ class App extends React.Component{
                 <Router>
       <div>
        <div className="container">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-            <li>
-              <Button>Teste</Button>
-            </li>
-          </ul>
-        </nav>
+       <Navbar bg="light" expand="lg">
+  <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+  <Navbar.Collapse id="basic-navbar-nav">
+    <Nav className="mr-auto">
+      <Nav.Link href="/">Home</Nav.Link>
+      <Nav.Link href="/about">About</Nav.Link>
+      <Nav.Link href="/users">Users</Nav.Link>
+    </Nav>
+
+  </Navbar.Collapse>
+</Navbar>
        </div>
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -77,12 +74,12 @@ class App extends React.Component{
           </Route>
           <Route path="/">
               <div className="container">
-                <h1>Hello, React!</h1>
+                <h1 style={{textAlign: 'center'}}>Hello, React!</h1>
                 <Table characterData={characters} removeCharacter={this.removeCharacter}/>
                 <Form handleSubmit={this.handleSubmit}/>
               </div>
           </Route>
-        </Switch>
+        </Switch> 
       </div>
     </Router>
 

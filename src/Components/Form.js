@@ -25,10 +25,10 @@ class Form extends Component{
     }
 
     submitForm = ()=>{
-        if(this.state.job == '' || this.state.name == ''){
-         if(this.state.job == '')
+        if(this.state.job === '' || this.state.name === ''){
+         if(this.state.job === '')
             alert('preencha o job!');
-         if(this.state.name == '')
+         if(this.state.name === '')
             alert("preencha o name!");
 
         }else{
