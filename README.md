@@ -2,6 +2,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+~~~~javascript
+    class App extends React.Component{
+        render(){
+            return(
+                <View>
+                    <Text>Hello World!</Text>
+                </View>
+            );
+        }
+    }
+
+~~~~
+
 In the project directory, you can run:
 
 ### `npm start`
