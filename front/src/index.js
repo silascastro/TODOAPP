@@ -36,6 +36,20 @@ class App extends React.Component{
         let aux = this.state.characters;
         aux.push(character);
         this.setState({characters: aux});
+        this.createStaff(character);
+    }
+
+    createStaff(character){
+      fetch('http://localhost:4100/funcionarios',{
+          method: 'POST',
+          headers: {'Content-Type': 'Access-Control-Allow-Origin'},
+          body: character
+        }).then(resp => resp.json())
+        .then(resp => {
+          console.log(resp);
+        }).catch(err => {
+          console.log(err);
+        })
     }
 
     render(){
