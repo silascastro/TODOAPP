@@ -20,11 +20,12 @@ class App extends React.Component{
     }
 
     componentDidMount(){
-
+      this.getStaff();
     }
 
     removeCharacter = (index) => {
         const {characters} = this.state
+        this.deleteStaff(characters[index].id);
         this.setState({
             characters: characters.filter((character, i) => {
             return i !== index
@@ -39,11 +40,46 @@ class App extends React.Component{
         this.createStaff(character);
     }
 
+    getStaff(){
+      fetch('http://localhost:4100/funcionarios',{
+          method: 'GET',
+          headers: {'Content-Type': 'Access-Control-Allow-Origin'},
+        }).then(resp => resp.json())
+        .then(resp => {
+
+          this.setState({characters: resp.map((e)=> {
+              return {id: e._id, name: e.name, job: e.job}
+            })
+          })
+        }).catch(err => {
+          console.log(err);
+        })
+    }
+
+
     createStaff(character){
       fetch('http://localhost:4100/funcionarios',{
           method: 'POST',
-          headers: {'Content-Type': 'Access-Control-Allow-Origin'},
-          body: character
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(character)
+        }).then(resp => resp.json())
+        .then(resp => {
+          console.log(resp);
+        }).catch(err => {
+          console.log(err);
+        })
+    }
+
+    deleteStaff(id){
+      fetch('http://localhost:4100/funcionarios/'+id,{
+          method: 'delete',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
         }).then(resp => resp.json())
         .then(resp => {
           console.log(resp);
