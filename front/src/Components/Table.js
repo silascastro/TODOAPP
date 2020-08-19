@@ -1,21 +1,28 @@
 import React, {Component} from 'react'
 
 const TableBody = (props) => {
-
+  var editID =10;
+  
   const rows = props.characterData.map((row, index)=>{
 
-      return (
+        return (
           <tr key={index}>
-                <td>{row.name}</td>
-                <td>{row.job}</td>
-                <td>
-                  <button onClick={()=>props.removeCharacter(index)}>Delete</button>
-                </td>
+              
+              {editID == 0 ? null :  <td>{row.name}</td>}
+              {editID == 0 ? null : <td>{row.job}</td>}
+              <td>
+                <button onClick={()=>{}}>Edit</button>
+              </td>
+              <td>
+                <button onClick={()=>props.removeCharacter(index)}>Delete</button>
+              </td>
+            
             </tr>
 
-        );
-    })
-    return <tbody>{rows}</tbody>;
+        );  
+     
+  })
+  return <tbody>{rows}</tbody>;
 };
 
 const TableHead = ()=>{
@@ -25,6 +32,7 @@ const TableHead = ()=>{
           <tr>
             <th>Name</th>
             <th>Job</th>
+            <th>Edit</th>
             <th>Remove</th>
           </tr>
         </thead>
