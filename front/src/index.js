@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import About from './Routes/About.js';
 import {Nav, Navbar, NavDropdown, FormControl} from 'react-bootstrap';
 import  Footer from './Components/Footer';
-import  Edit from './Components/Edit';
+
 
 
 class App extends React.Component{
@@ -129,7 +129,7 @@ class App extends React.Component{
                 <Table characterData={characters} removeCharacter={this.removeCharacter}/>
                 <Form handleSubmit={this.handleSubmit}/>
                 <Footer/>
-                <Edit />
+
               </div>
           </Route>
         </Switch> 
