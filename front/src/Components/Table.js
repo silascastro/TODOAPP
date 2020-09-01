@@ -40,7 +40,7 @@ const TableBody = (props) => {
           <td>
             <button onClick={() => {
               setID(index);
-              setJob(row.name);
+              setJob(row.job);
               setName(row.name);
               handlerShow();
             }}>Edit</button>
