@@ -5,7 +5,7 @@ import Form from './Components/Form';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import About from './Routes/About.js';
+import About from './Screens/About.js';
 import {Nav, Navbar} from 'react-bootstrap';
 import  Footer from './Components/Footer';
 
@@ -64,7 +64,7 @@ class App extends React.Component{
           this.setState({characters: resp.map((e)=> {
               return {id: e._id, name: e.name, job: e.job}
             })
-          })
+          });
         }).catch(err => {
           console.log(err);
         })
@@ -121,55 +121,40 @@ class App extends React.Component{
     render(){
         const {characters} = this.state;
         return (
-          /*<div className="App">
-                <h1>Hello, React!</h1>
-                <Table characterData={characters} removeCharacter={this.removeCharacter}/>
-                <Form handleSubmit={this.handleSubmit}/>
+          <Router>
+            <div>
+            <div className="container">
+              <Navbar bg="light" expand="lg">
+                <Navbar.Brand href="#home">TODOAPP</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="mr-auto">
+                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/about">About</Nav.Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Navbar>
             </div>
-          */
-                <Router>
-      <div>
-       <div className="container">
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="#home">TODOAPP</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/about">About</Nav.Link>
-              <Nav.Link href="/users">Users</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-       </div>
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/">
-              <div className="container">
-                <h1 style={{textAlign: 'center'}}>Hello, React!</h1>
-                <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}/>
-                <Form handlerSubmit={this.handlerSubmit}/>
-                <Footer/>
-              </div>
-          </Route>
-        </Switch> 
-      </div>
-    </Router>
+
+              <Switch>
+                <Route path="/about">
+                  <About />
+                </Route>
+                <Route path="/">
+                    <div className="container">
+                      <h1 style={{textAlign: 'center'}}>Hello, React!</h1>
+                      <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}/>
+                      <Form handlerSubmit={this.handlerSubmit}/>
+                      <Footer/>
+                    </div>
+                </Route>
+              </Switch> 
+            </div>
+          </Router>
 
         );
     }
 }
 
-
-function Users() {
-  return(<div className="container"><h2>Users</h2></div>);
-}
 
 ReactDOM.render(<App/>, document.getElementById('root'));
