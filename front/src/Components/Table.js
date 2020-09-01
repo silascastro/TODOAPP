@@ -6,24 +6,24 @@ var show = false;
 const TableBody = (props) => {
   //para abrir e fechar o modal
   const [show, setShow] = React.useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  //
+  const handlerClose = () => setShow(false);
+  const handlerShow = () => setShow(true);
+  //objetos 
   const [_id, setID] = React.useState('');
   const [_name, setName] = React.useState('');
   const [_job, setJob] = React.useState('');
 
   const rows = props.characterData.map((row, index)=>{
         
-    function handleName(event) {
+    function handlerName(event) {
       setName(event.target.value);
     }
 
-    function handleJob(event) {
+    function handlerJob(event) {
       setJob(event.target.value);
     }
 
-    function handleID(event) {
+    function handlerID(event) {
       setID(event.target.value);
     }
 
@@ -42,7 +42,7 @@ const TableBody = (props) => {
               setID(index);
               setJob(row.name);
               setName(row.name);
-              handleShow();
+              handlerShow();
             }}>Edit</button>
           </td>
           <td>
@@ -68,24 +68,24 @@ const TableBody = (props) => {
                 name="name"
                 id="name"
                 value={_name}
-                onChange={handleName} />
+                onChange={handlerName} />
             <label htmlFor="job">Job</label>
             <input
                 type="text"
                 name="job"
                 id="job"
                 value={_job}
-                onChange={handleJob} />
+                onChange={handlerJob} />
         </form>
 
         </Modal.Body>
         <Modal.Footer>
-        <Button variant="secondary"  onClick={handleClose}>
+        <Button variant="secondary"  onClick={handlerClose}>
             Close
         </Button>
         <Button variant="primary" onClick={()=>{
           props.updateCharacter(_id,_name, _job);
-          handleClose();
+          handlerClose();
         }}>Confirmar</Button>
         </Modal.Footer>
     </Modal>

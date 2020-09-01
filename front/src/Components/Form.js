@@ -16,7 +16,7 @@ class Form extends Component{
         };
     }
 
-    handleChange = (event) => {
+    handlerChange = (event) => {
         const {name, value} = event.target;
 
         this.setState({
@@ -32,7 +32,7 @@ class Form extends Component{
             alert("preencha o name!");
 
         }else{
-            this.props.handleSubmit({name: this.state.name, job: this.state.job});
+            this.props.handlerSubmit({name: this.state.name, job: this.state.job});
             this.setState({name: '', job: ''});
         }
     }
@@ -48,14 +48,14 @@ class Form extends Component{
                     name="name"
                     id="name"
                     value={name}
-                    onChange={this.handleChange} />
+                    onChange={this.handlerChange} />
                 <label htmlFor="job">Job</label>
                 <input
                     type="text"
                     name="job"
                     id="job"
                     value={job}
-                    onChange={this.handleChange} />
+                    onChange={this.handlerChange} />
 
                 <input type="button" value="Submit" onClick={this.submitForm} />
             </form>

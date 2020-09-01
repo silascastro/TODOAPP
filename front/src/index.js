@@ -47,7 +47,7 @@ class App extends React.Component{
   }
 
 
-    handleSubmit = (character) => {
+    handlerSubmit = (character) => {
         let aux = this.state.characters;
         aux.push(character);
         this.setState({characters: aux});
@@ -155,7 +155,7 @@ class App extends React.Component{
               <div className="container">
                 <h1 style={{textAlign: 'center'}}>Hello, React!</h1>
                 <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}/>
-                <Form handleSubmit={this.handleSubmit}/>
+                <Form handlerSubmit={this.handlerSubmit}/>
                 <Footer/>
               </div>
           </Route>
