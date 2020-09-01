@@ -4,50 +4,93 @@ import {Modal, Button} from 'react-bootstrap';
 var show = false;
 
 const TableBody = (props) => {
+  //para abrir e fechar o modal
   const [show, setShow] = React.useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
-  const rows = props.characterData.map((row, index)=>{
+  //
+  const [_id, setID] = React.useState('');
+  const [_name, setName] = React.useState('');
+  const [_job, setJob] = React.useState('');
 
-        return (
-          <>
-          <tr key={index}>
-              
-              <td>{row.name}</td>
-              <td>{row.job}</td>
-              <td>
-                <button onClick={handleShow}>Edit</button>
-              </td>
-              <td>
-                <button onClick={()=>props.removeCharacter(index)}>Delete</button>
-              </td>
-            
-            </tr>
-            
-            <Modal
-            show={show}
-            onHide={()=>{}}
-            backdrop="static"
-            keyboard={false}
-        >
-            <Modal.Header closeButton>
-            <Modal.Title>Modal title</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-            I will not close if you click outside me. Don't even try to press
-            escape key.
-            </Modal.Body>
-            <Modal.Footer>
-            <Button variant="secondary"  onClick={handleClose}>
-                Close
-            </Button>
-            <Button variant="primary"  onClick={handleClose}>Understood</Button>
-            </Modal.Footer>
-        </Modal>
-                </>
-        );  
+  const rows = props.characterData.map((row, index)=>{
+        
+    function handleName(event) {
+      setName(event.target.value);
+    }
+
+    function handleJob(event) {
+      setJob(event.target.value);
+    }
+
+    function handleID(event) {
+      setID(event.target.value);
+    }
+
+    function submitModal(){
+
+    }
+
+    return (
+      <>
+      <tr key={index}>
+          
+          <td>{row.name}</td>
+          <td>{row.job}</td>
+          <td>
+            <button onClick={() => {
+              setID(index);
+              setJob(row.name);
+              setName(row.name);
+              handleShow();
+            }}>Edit</button>
+          </td>
+          <td>
+            <button onClick={()=>props.removeCharacter(index)}>Delete</button>
+          </td>
+        
+        </tr>
+        
+        <Modal
+        show={show}
+        onHide={()=>{}}
+        backdrop="static"
+        keyboard={false}
+    >
+        <Modal.Header closeButton>
+        <Modal.Title>Modal title</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <form>
+            <label htmlFor="name">Name</label>
+            <input
+                type="text"
+                name="name"
+                id="name"
+                value={_name}
+                onChange={handleName} />
+            <label htmlFor="job">Job</label>
+            <input
+                type="text"
+                name="job"
+                id="job"
+                value={_job}
+                onChange={handleJob} />
+        </form>
+
+        </Modal.Body>
+        <Modal.Footer>
+        <Button variant="secondary"  onClick={handleClose}>
+            Close
+        </Button>
+        <Button variant="primary" onClick={()=>{
+          props.updateCharacter(_id,_name, _job);
+          handleClose();
+        }}>Confirmar</Button>
+        </Modal.Footer>
+    </Modal>
+            </>
+    );  
      
   })
   return <tbody>{rows}</tbody>;
@@ -73,11 +116,11 @@ class Table extends Component {
 
 
     render() {
-    const {characterData, removeCharacter} = this.props;
+    const {characterData, removeCharacter, updateCharacter} = this.props;
     return (
       <table>
         <TableHead></TableHead>
-        <TableBody characterData={characterData} removeCharacter={removeCharacter}/>
+        <TableBody characterData={characterData} removeCharacter={removeCharacter} updateCharacter={updateCharacter}/>
       </table>
     )
   }

@@ -32,8 +32,8 @@ class Form extends Component{
             alert("preencha o name!");
 
         }else{
-        this.props.handleSubmit({name: this.state.name, job: this.state.job});
-        this.setState({name: '', job: ''});
+            this.props.handleSubmit({name: this.state.name, job: this.state.job});
+            this.setState({name: '', job: ''});
         }
     }
 

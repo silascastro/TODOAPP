@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Table from './Components/Table';
 import Form from './Components/Form';
-import {BrowserRouter as Router, Switch, Route,Link} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
 import About from './Routes/About.js';
-import {Nav, Navbar, NavDropdown, FormControl} from 'react-bootstrap';
+import {Nav, Navbar} from 'react-bootstrap';
 import  Footer from './Components/Footer';
 
 
@@ -34,6 +33,19 @@ class App extends React.Component{
             }),
         })
     }
+
+    updateCharacter = (index, name, job) => {
+
+      const {characters} = this.state;
+      characters[index].name = name;
+      characters[index].job = job;
+      this.updateStaff({
+        id: characters[index].id,
+        name: characters[index].name,
+        job: characters[index].job,
+      });
+  }
+
 
     handleSubmit = (character) => {
         let aux = this.state.characters;
@@ -62,6 +74,22 @@ class App extends React.Component{
     createStaff(character){
       fetch('http://localhost:4100/funcionarios',{
           method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(character)
+        }).then(resp => resp.json())
+        .then(resp => {
+          console.log(resp);
+        }).catch(err => {
+          console.log(err);
+        })
+    }
+
+    updateStaff(character){
+      fetch('http://localhost:4100/funcionarios/'+character.id,{
+          method: 'put',
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
@@ -126,10 +154,9 @@ class App extends React.Component{
           <Route path="/">
               <div className="container">
                 <h1 style={{textAlign: 'center'}}>Hello, React!</h1>
-                <Table characterData={characters} removeCharacter={this.removeCharacter}/>
+                <Table characterData={characters} removeCharacter={this.removeCharacter} updateCharacter={this.updateCharacter}/>
                 <Form handleSubmit={this.handleSubmit}/>
                 <Footer/>
-
               </div>
           </Route>
         </Switch> 
